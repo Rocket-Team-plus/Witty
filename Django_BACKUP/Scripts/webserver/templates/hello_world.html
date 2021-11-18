@@ -1,0 +1,574 @@
+<!DOCTYPE HTML>
+{% load static %}
+<html>
+
+<head>
+	<!--頁面設定-->
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script
+		src="https://s3.ap-northeast-2.amazonaws.com/jambolive.tv/static/js/underscore/1.9.1/underscore-min.js"></script>
+	<script
+		src="https://s3.ap-northeast-2.amazonaws.com/jambolive.tv/static/js/jquery/3.2.1/jquery-3.2.1.min.js"></script>
+	<script src="https://s3.ap-northeast-2.amazonaws.com/jambolive.tv/static/js/plugin.js"></script>
+	<script src="https://d3js.org/d3.v3.min.js"></script>
+
+	<!--前期準備-->
+	{%load static%}
+	<script src="{% static 'js/register_event.js' %}"></script>
+
+	<!--bootstrap & Jquery 放置處-->
+	<script src="../static/jquery-3.6.0.js"></script>
+	<script src="../static/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+	<link href="../static/bootstrap-3.3.7-dist/css/bootstrap.css" rel="stylesheet" type="text/css">
+
+	<!--datepicker套件放置處-->
+	<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+	<!--datatable套件放置處-->
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.0/css/jquery.dataTables.css">
+	<script type="text/javascript" charset="utf8"
+		src="https://cdn.datatables.net/1.11.0/js/jquery.dataTables.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	<!--
+        <script src="https://s3.ap-northeast-2.amazonaws.com/jambolive.tv/static/console2/js/plugin.js"></script>
+        <script src="https://s3.ap-northeast-2.amazonaws.com/jambolive.tv/static/console2/js/manage.js"></script>
+    -->
+	<title>策略小助手</title>
+
+	<!--將csrf token建為全域變數，以供外部js檔使用-->
+	<script>var CSRF_TOKEN = '{{ csrf_token }}';</script>
+
+
+	<script src="{% static 'js/hover.js' %}"></script>
+	<script src="{% static 'js/initialization.js' %}"></script>
+	<script src="{% static 'js/fixed_header.js' %}"></script>
+	<link rel="stylesheet" href="{% static 'css/base.css' %}">
+	<link rel="stylesheet" href="{% static 'css/analysis.css'%}">
+	<link rel="stylesheet" href="{% static 'css/chart.css'%}">
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+</head>
+
+<body>
+	<header class="site-header">
+		<div class="wrapper site-header-wrapper clear">
+			<h1 class="site-logo">
+				<img src="{% static 'img/witty_arial_logo.png' %}" alt="Witty" title="Witty">
+			</h1>
+
+			<h2 class="page-title theme">策 略 小 助 手</h2>
+			<nav>
+				<ul class="owner_head-tool float-l align-c">
+					<li>
+						<a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank"
+							class="btn-reg btn-nr f-line f-lg">直播小幫手</a>
+					</li>
+					<li>
+						<a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank"
+							class="btn-reg btn-nr f-line f-lg">訂單小幫手</a>
+					</li>
+					<li>
+						<a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank"
+							class="btn-reg btn-nr f-line f-lg">出貨小幫手</a>
+					</li>
+					<li>
+						<a href="/fill_form/" target="_blank" class="btn-reg btn-nr f-line f-lg">表單小幫手</a>
+					</li>
+					<li>
+						<a href="/analysis/" target="_blank" class="btn-reg btn-nr f-line f-lg">分析小幫手</a>
+					</li>
+					<li>
+						<a href="/training_data/" target="_blank" class="btn-reg btn-nr f-line f-lg">訓練小幫手</a>
+					</li>
+				</ul>
+				<!--owner_head-tool end-->
+			</nav>
+			<div class="account float-r align-r">
+				<div class="store-name theme ellipsis f-xlg f-bold" style=" padding-right: 8 px ;">嗚依替 </div>
+				<div> <a href="/console/setting/">設定</a> / <span id="fb"
+						style="cursor: pointer; color: #4285F4;">切換帳號</span>
+				</div>
+			</div>
+		</div>
+	</header>
+	<section class="commodity main-content wrapper">
+		<div class="content-area owner_content_area clear">
+			<!--跳頁地方的按鈕-->
+			<div class="bs-example bs-example-tabs" data-example-id="togglable-tabs">
+				<ul class="nav nav-tabs" id="myTabs" role="tablist">
+					<li role="presentation" class="f-mlg"><a href="#home" id="home-tab" role="tab" data-toggle="tab"
+							aria-controls="home" aria-expanded="true">總體貼文表現</a>
+					</li>
+					<li role="presentation" class="f-mlg"><a href="#profile" role="tab" id="profile-tab"
+							data-toggle="tab" aria-controls="profile" aria-expanded="false">留言互動與商品表現</a>
+					</li>
+					<li role="presentation" class="f-mlg"><a href="#user" role="tab" id="user-tab" data-toggle="tab"
+							aria-controls="user" aria-expanded="false">用戶習性分析</a>
+					</li>
+					<li role="presentation" class="f-mlg"><a href="#supervise" role="tab" id="supervise-tab"
+							data-toggle="tab" aria-controls="supervise" aria-expanded="false">購物流程監控</a>
+					</li>
+					<li role="presentation" class="f-mlg"><a href="#analysis" role="tab" id="analysis-tab"
+							data-toggle="tab" aria-controls="analysis" aria-expanded="false">直播即時留言</a>
+					</li>
+					<li role="presentation" class="f-mlg"><a href="#group" role="tab" id="group-tab" data-toggle="tab"
+							aria-controls="analysis" aria-expanded="false">直播客群分析</a>
+					</li>
+				</ul>
+				<div class="tab-content row" id="myTabContent">
+					<div class="tab-pane fade col-xs-12" role="tabpanel" id="home" aria-labelledby="home-tab">
+						<!--放數據的地方-->
+						<div class="clear data-container">
+							<!--放靜態數據表-->
+							<div class="data row">
+								<div class="col-xs-12">
+									<div class="title">直播貼文總體數據表現 <span><img class="help-img" data-hover="可以透過下拉式選單選擇欲顯示的筆數
+										<br> 並且可透過點選表格上方的指標選擇以何種方式進行排列
+										<br> 右方搜尋列可直接搜尋任意想要的文字，只要指標符合搜尋文字即可"
+												src=" "></span>
+									</div>
+									<table id="table_id" class="table">
+										<thead>
+											<tr>
+												<th scope="col">直播場次</th>
+												<th scope="col">時間</th>
+												<th scope="col">按讚數</th>
+												<th scope="col">留言數</th>
+												<th scope="col">分享數</th>
+												<th scope="col">觀看次數</th>
+												<th scope="col">訂單總數</th>
+											</tr>
+										</thead>
+									</table>
+								</div>
+								<div class="col-xs-12 col-sm-12">
+									<div class="title">
+										<p data-hover="請輸入起始時間與結束時間並選擇想檢視的指標 
+										<br> 可以透過點選圖表上方指標將指標隱藏">臉書貼文總體表現<span data-hover="點選下拉式選單可選取直播場次
+										<br> 將會顯示各場直播商品銷售數據"><img class="help-img"
+													src="{% static 'img/question-mark.png' %}"></span>
+										</p>
+									</div>
+									<div class="picture_display">
+
+										<div class="data-header-select">
+											<p class="header-select">起始時間 : </p>
+											<input type="text" id="begin_overall" class="header-select">
+											<p class="header-select">~</p>
+											<p class="header-select"> 結束時間 : </p>
+											<input type="text" id="end_overall" class="header-select">
+											<p class="header-select">選擇指標 : </p>
+											<div class="dropdown header-select ">
+												<button class="btn btn-default dropdown-toggle chart-btn" type="button"
+													id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="false"
+													aria-expanded="false">
+													選擇指標
+													<span class="caret"></span>
+												</button>
+												<ul class="dropdown-menu checkbox-menu" aria-labelledby="dropdownMenu1">
+													<li>
+														<label class="all">
+															<input type="checkbox" value="all" name="performance">
+															全部
+														</label>
+													</li>
+													<li>
+														<label>
+															<input type="checkbox" value="likes" name="performance">
+															讚數
+														</label>
+													</li>
+													<li>
+														<label>
+															<input type="checkbox" value="comments" name="performance">
+															留言數
+														</label>
+													</li>
+													<li>
+														<label>
+															<input type="checkbox" value="shares" name="performance">
+															分享數
+														</label>
+													</li>
+													<li>
+														<label>
+															<input type="checkbox" value="views" name="performance">
+															觀看數
+														</label>
+													</li>
+													<li>
+														<label>
+															<input type="checkbox" value="order_amount"
+																name="performance"> 訂單數
+														</label>
+													</li>
+												</ul>
+											</div>
+											<button class="btn btn-primary header-select chart-btn"
+												id="time_overall">送出</button>
+										</div>
+
+										<div class="data-content" style="height:100vh" id="test">
+											<canvas class="chart_js" id="streaming_stack_bar_chart"></canvas>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="tab-pane fade active in col-xs-12" role="tabpanel" id="profile"
+						aria-labelledby="profile-tab">
+						<!--放靜態數據表-->
+						<div class="data row">
+							<div class="col-xs-12 col-sm-6 picture">
+								<div class="title">單場直播商品銷售分析<span data-hover="點選下拉式選單可選取直播場次
+									<br> 將會顯示各場直播商品銷售數據"><img class="help-img"
+									src="{% static 'img/question-mark.png' %}"></span>
+								</div>
+								<div class="picture_display">
+									<div class="form-select-bar">
+										<select class="form-select form-select-lg mb-3"
+											aria-label=".form-select-lg example" id="product_select" name="請選擇直播">
+										</select>
+									</div>
+									<div class="data-content table_content">
+										<table class="table">
+											<thead>
+												<tr>
+													<th scope="col">商品編號</th>
+													<th scope="col">商品名稱</th>
+													<th scope="col">銷售量</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<th scope="row">1</th>
+													<td>C7093</td>
+													<td>韓系牛仔褲</td>
+													<td>23000</td>
+												</tr>
+												<tr>
+													<th scope="row">2</th>
+													<td>D6025</td>
+													<td>膨膨紅色裙子</td>
+													<td>34000</td>
+												</tr>
+												<tr>
+													<th scope="row">3</th>
+													<td>F7103</td>
+													<td>超好看的鞋子</td>
+													<td>27800</td>
+												</tr>
+												<tr>
+													<th scope="row">4</th>
+													<td>G2223</td>
+													<td>超好看的帽子</td>
+													<td>25500</td>
+												</tr>
+												<tr>
+													<th scope="row">5</th>
+													<td>K2903</td>
+													<td>超好看的項鍊</td>
+													<td>88800</td>
+												</tr>
+												<tr>
+													<th scope="row">6</th>
+													<td>P5765</td>
+													<td>王辰君的背包</td>
+													<td>67840</td>
+												</tr>
+												<tr>
+													<th scope="row">7</th>
+													<td>O2233</td>
+													<td>飛天魔毯</td>
+													<td>69000</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+
+							<div class="col-xs-12 col-sm-6 picture">
+								<div class="title">單場直播留言互動表現<span data-hover=" 點選下拉式選單可選擇場次
+										<br>選擇點選圖表上的標數可以取消顯示該標數"><img class="help-img"
+										src="{% static 'img/question-mark.png' %}"></span>
+								</div>
+								<div class="picture_display">
+									<div class="form-select-bar">
+										<select class="form-select form-select-lg mb-3"
+											aria-label=".form-select-lg example" id="order_select">
+										</select>
+									</div>
+									<div class="data-content">
+										<canvas class="chart_js" id="bid_step_chart_chart"></canvas>
+									</div>
+								</div>
+							</div>
+							<div class="col-xs-12 col-sm-12 picture">
+								<div class="title">多場直播留言互動表現<span data-hover="點選下拉式選單可選取直播場次
+									<br> 將會顯示各場直播商品銷售數據"><img class="help-img"
+									src="{% static 'img/question-mark.png' %}"></span>
+								</div>
+								<div class="picture_display">
+									<div class="form-select-bar">
+										<p class="header-select">起始時間 : </p>
+										<input type="text" id="begin0" class="header-select">
+										<p class="header-select">~</p>
+										<p class="header-select"> 結束時間 : </p>
+										<input type="text" id="end0" class="header-select">
+										<button class="btn btn-primary header-select chart-btn" id="time0">送出</button>
+									</div>
+									<div class="data-content">
+										<canvas class="chart_js big_bar_chart" id="orders_bar_chart"></canvas>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="tab-pane fade active in col-xs-12" role="tabpanel" id="user" aria-labelledby="user-tab">
+						<!--放靜態數據表-->
+						<div class="data">
+							<!--配送-->
+							<div class="col-sm-6 picture">
+								<div class="title">單場直播配送表現</div>
+								<div class="picture_display">
+									<div class="form-select-bar">
+										<select class="form-select form-select-lg mb-3"
+											aria-label=".form-select-lg example" id="delivery_select">
+
+										</select>
+									</div>
+									<div class="data-content">
+										<canvas class="chart_js  pie_chart" id="delivery_term_pie_chart"></canvas>
+									</div>
+								</div>
+							</div>
+							<div class="col-sm-6 picture">
+								<div class="title">多場直播下配送表現</div>
+								<div class="picture_display">
+									<div class="form-select-bar">
+										<p class="header-select">起始時間 : </p>
+										<input type="text" id="begin1" class="header-select">
+										<p class="header-select">~</p>
+										<p class="header-select"> 結束時間 : </p>
+										<input type="text" id="end1" class="header-select">
+										<button class="btn btn-primary header-select chart-btn" id="time1">送出</button>
+									</div>
+									<div class="data-content">
+										<canvas class="chart_js" id="delivery_term_bar_chart"></canvas>
+									</div>
+								</div>
+							</div>
+							<!--付款-->
+							<div class="col-sm-6 picture">
+								<div class="title">單場直播付款表現</div>
+								<div class="picture_display">
+									<div class="form-select-bar">
+										<select class="form-select form-select-lg mb-3"
+											aria-label=".form-select-lg example" id="payment_select">
+
+										</select>
+									</div>
+									<div class="data-content">
+										<canvas class="chart_js  pie_chart" id="payment_term_pie_chart"></canvas>
+									</div>
+								</div>
+							</div>
+							<div class="col-sm-6 picture">
+								<div class="title">多場直播付款表現</div>
+								<div class="picture_display">
+									<div class="form-select-bar">
+										<p class="header-select ">起始時間 : </p>
+										<input type="text" id="begin3" class="header-select">
+										<p class="header-select">~</p>
+										<p class="header-select"> 結束時間 : </p>
+										<input type="text" id="end3" class="header-select">
+										<button class="btn btn-primary header-select chart-btn" id="time3">送出</button>
+									</div>
+									<div class="data-content">
+										<canvas class="chart_js" id="payment_term_bar_chart"></canvas>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="tab-pane fade active in" role="tabpanel" id="supervise" aria-labelledby="supervise-tab">
+						<!--放靜態數據表-->
+						<div class="data">
+							<!--棄單-->
+							<div class="col-sm-6 picture">
+								<div class="title">單場直播下棄單表現</div>
+								<div class="picture_display">
+									<div class="form-select-bar">
+										<select class="form-select form-select-lg mb-3"
+											aria-label=".form-select-lg example" id="preorder_select">
+
+										</select>
+									</div>
+									<div class="data-content">
+										<canvas class="chart_js  pie_chart" id="drop_pie_chart"></canvas>
+									</div>
+								</div>
+							</div>
+							<div class="col-sm-6 picture">
+								<div class="title">多場直播下棄單表現</div>
+								<div class="picture_display">
+									<div class="form-select-bar">
+										<p class="header-select">起始時間 : </p>
+										<input type="text" id="begin2" class="header-select">
+										<p class="header-select">~</p>
+										<p class="header-select"> 結束時間 : </p>
+										<input type="text" id="end2" class="header-select">
+										<button class="btn btn-primary header-select chart-btn" id="time2">送出</button>
+									</div>
+									<div class="data-content">
+										<canvas id="drop_chart" class="chart_js"></canvas>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="tab-pane fade active in" role="tabpanel" id="analysis" aria-labelledby="analysis-tab">
+						<div class="data_index"></div>
+						<div class="col-xs-12">
+							<table id="table_comment" class="table">
+								<thead>
+									<tr>
+										<th>留言</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<th>我有加單到嗎????</th>
+									</tr>
+									<tr>
+										<th>皺術電影版什麼時候上映啊???</th>
+									</tr>
+									<tr>
+										<th>我想看五條悟的周邊</th>
+									</tr>
+								</tbody>
+							</table>
+							<div class="data-content">
+								<canvas class="chart_js" id="mycanvas"></canvas>
+							</div>
+						</div>
+					</div>
+					<div class="tab-pane fade active in" role="tabpanel" id="group" aria-labelledby="group-tab">
+						<!--放靜態數據表-->
+						<div class="data">
+							<div class="col-sm-6 picture">
+								<div class="title">單場直播客群性別分布</div>
+								<div class="picture_display">
+									<div class="form-select-bar">
+										<select class="form-select form-select-lg mb-3"
+											aria-label=".form-select-lg example" id="single_gender_select">
+										</select>
+									</div>
+									<div class="data-content">
+										<canvas class="chart_js  pie_chart" id="single_gender_chart"></canvas>
+									</div>
+								</div>
+							</div>
+							<div class="col-sm-6 picture">
+								<div class="title">多場直播客群性別分布</div>
+								<div class="picture_display">
+									<div class="form-select-bar">
+										<p class="header-select">起始時間 : </p>
+										<input type="text" id="begin3" class="header-select">
+										<p class="header-select">~</p>
+										<p class="header-select"> 結束時間 : </p>
+										<input type="text" id="end3" class="header-select">
+										<button class="btn btn-primary header-select chart-btn" id="time4">送出</button>
+									</div>
+									<div class="data-content">
+										<canvas id="mutiple_gender_chart" class="chart_js"></canvas>
+									</div>
+								</div>
+							</div>
+							<div class="col-sm-6 picture">
+								<div class="title">單場直播客群年齡分布</div>
+								<div class="picture_display">
+									<div class="form-select-bar">
+										<select class="form-select form-select-lg mb-3"
+											aria-label=".form-select-lg example" id="single_age_select">
+										</select>
+									</div>
+									<div class="data-content">
+										<canvas class="chart_js  pie_chart" id="single_age_chart"></canvas>
+									</div>
+								</div>
+							</div>
+							<div class="col-sm-6 picture">
+								<div class="title">多場直播客群平均年齡分布</div>
+								<div class="picture_display">
+									<div class="form-select-bar">
+										<p class="header-select">起始時間 : </p>
+										<input type="text" id="begin4" class="header-select">
+										<p class="header-select">~</p>
+										<p class="header-select"> 結束時間 : </p>
+										<input type="text" id="end4" class="header-select">
+										<button class="btn btn-primary header-select chart-btn" id="time5">送出</button>
+									</div>
+									<div class="data-content">
+										<canvas id="mutiple_age_chart" class="chart_js"></canvas>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!--網站公告 start -->
+	<div class="site-dialog server-billboard" style="display: none;">
+		<header class="site-dialog-header"
+			style="padding: 20px 25px; border-bottom: 2px solid #e75280;line-height: 1; background-color: white;">
+			<h1 style="width: 15.8%;"><img
+					src="https://s3.ap-northeast-2.amazonaws.com/jambolive.tv/static/console2/img/common/logo.png"
+					alt="" title="JoJambo" style="width: 100%;"></h1>
+			<h2 class="page-title theme"
+				style="font-size: 18px; border-left: 1px solid #e75280; padding-left: 15px; line-height: 1; margin-left: 15px;">
+				就醬播放送
+			</h2>
+		</header>
+		<div class="site-dialog-content"
+			style="line-height: 180%; font-family: 'Microsoft Jhenghei', '微軟正黑體', 'Arial', sans-serif; font-size: 14px; color: #4c4c4c; padding: 10px 25px 40px 25px;">
+			<p></p>
+		</div>
+		<footer style="position: absolute; bottom: 65px; width: 100%; text-align: center;">
+			<input id="billboard_read" type="checkbox" value="" style="display: inline;">
+			<label for="billboard_read"> 我已經詳細閱讀此則訊息</label><br>
+			<input id="user_id" type="hidden" value="24024">
+		</footer>
+	</div>
+	<!-- 網站公告 end-->
+	<!-- 資料視覺化 Scripts -->
+	<script src="{% static 'js/data_visualization.js' %}"></script>
+	<script src="{% static 'js/canvas_adjusting.js' %}"></script>
+
+	<!-- 視窗改變時，讓canvas自動適應大小 -->
+	<script>
+		window.onresize = function () {
+			$("canvas").each(function () {
+				var current_element = $(this);
+				parent_width = current_element[0].parentElement.clientWidth;
+				parent_height = current_element[0].parentElement.clientHeight;
+				current_element.width(parent_width);
+				current_element.height(parent_height);
+			});
+		};
+	</script>
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,28 @@
+{
+  "name": "rocket_team_messenger_webhook",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "rocket_team",
+  "license": "ISC",
+  "dependencies": {
+    "Logger": "^0.0.0",
+    "axios": "^0.21.1",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "log": "^6.0.0",
+    "logger": "^0.0.1",
+    "moment": "^2.29.1",
+    "mysql": "^2.18.1",
+    "node-fetch": "^2.6.1",
+    "node-schedule": "^2.0.0",
+    "node-wit": "^6.0.1",
+    "prop-types": "^15.7.2"
+  },
+  "engines": {
+    "node": "14.17.3"
+  }
+}

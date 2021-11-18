@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<!--頁面設定-->
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<script src="https://s3.ap-northeast-2.amazonaws.com/jambolive.tv/static/js/underscore/1.9.1/underscore-min.js"></script>
+		<script src="https://s3.ap-northeast-2.amazonaws.com/jambolive.tv/static/js/jquery/3.2.1/jquery-3.2.1.min.js"></script>
+		<script src="https://s3.ap-northeast-2.amazonaws.com/jambolive.tv/static/js/plugin.js"></script>
+		<script src="https://d3js.org/d3.v3.min.js"></script>
+
+		<!--前期準備-->
+		{%load static%}
+		<link href="{% static 'css/training.css' %}" rel="stylesheet" type="text/css">
+		<link  rel="stylesheet" href="{% static 'css/base.css' %}" >
+		<script src="{% static 'register_event.js' %}"></script>
+		<script src = "{% static 'fixed_header.js' %"> </script>
+		<!--bootstrap & Jquery 放置處-->
+		<script src="../static/jquery-3.6.0.js"></script>
+		<script src="../static/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+		<link href="../static/bootstrap-3.3.7-dist/css/bootstrap.css" rel="stylesheet" type="text/css">
+
+		<!--datepicker套件放置處-->
+		<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+		<!--
+		<script src="https://s3.ap-northeast-2.amazonaws.com/jambolive.tv/static/console2/js/plugin.js"></script>
+		<script src="https://s3.ap-northeast-2.amazonaws.com/jambolive.tv/static/console2/js/manage.js"></script>
+		-->
+		<title>策略小助手</title>
+
+		<!--將csrf token建為全域變數，以供外部js檔使用-->
+		<script>
+			var CSRF_TOKEN = '{{ csrf_token }}';
+		</script>
+		<script>
+			$(document).ready(function(){
+				del_data();
+			});
+		</script>
+		<style>
+			.training_panel{
+                margin-top:5px;
+			}
+			.training_area{
+				margin-top:10px;
+                border-bottom: 1px solid;
+				padding-bottom: 10px;
+			}
+			.training_table{
+				border:1px solid;
+				background-color:#f8f9fa;
+			}
+			.comment{
+				border:1px solid;
+				border-radius:7px;
+				padding-left:5%;
+				padding-top:5px;
+				height:35px;
+				background-color:white;
+				font-size:18px;
+			}
+			.form-select{
+				border-radius: 7px;
+				height:35px;
+				width:100% !important;
+				font-size:18px;
+			}
+			.row{
+				width:auto !important;
+			}
+
+			.header{
+				border:1px solid;
+
+				background-color: #4c4c4c;
+				color:white;
+				font-size: 20px;
+			}
+			.form-check-input{
+				width:30px !important;
+				height: 30px !important;
+			}
+			.training_panel_header{
+				margin-top:10%;
+			}
+			.training_notice{
+                margin-top:5%;
+				
+			}
+			.training_notice_panel{
+				background-color:#f8f9fa;
+				padding:10px;
+			}
+			.btn-info{
+				font-size:18px;
+			}
+			.select_label{
+				font-size:18px;
+			}
+			#train{
+				height:60px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container" id="fixed-header">
+			<header class="site-header">
+				<div class="wrapper site-header-wrapper clear">                
+					<h1 class="site-logo">
+						<img src="{% static 'img/witty_arial_logo.png' %}"
+							alt="Witty" title="Witty">
+					</h1>                
+					<h2 class="page-title theme">策 略 小 助 手</h2>        
+					<nav>          
+						<ul class="owner_head-tool float-l align-c">            
+							<li>              
+								<a href="/console/live/" target="_blank" class="btn-reg btn-nr f-line f-min">直播小幫手</a>            
+							</li>            
+							<li>              
+								<a href="/console/order/" target="_blank" class="btn-reg btn-nr f-line f-min">訂單小幫手</a>            
+							</li>           
+							<li>              
+								<a href="/console/ship/" target="_blank" class="btn-reg btn-nr f-line f-min">出貨小幫手</a>            
+							</li>            
+							<li>              
+								<a href="/console/fans/" target="_blank" class="btn-reg btn-nr f-line f-min">粉絲小幫手</a>            
+							</li>
+							<li>              
+								<a href="/analysis/" target="_blank" class="btn-reg btn-nr f-line f-min">分析小幫手</a>            
+							</li>
+							<li>              
+								<a href="/training_data/" target="_blank" class="btn-reg btn-nr f-line f-min">訓練小幫手</a>            
+							</li>          
+						</ul><!--owner_head-tool end-->        
+					</nav>        
+					<div class="account float-r align-r">          
+						<div class="store-name theme ellipsis" style="font-size: 150%; font-weight: bold; padding-right: 8 px ;">張聚洋 </div>          
+						<div>張聚洋 您好（ <a href="/console/setting/">設定</a> / <span id="fb" style="cursor: pointer; color: #4285f4;">切換帳號</span> ）          
+						</div>        
+					</div>      
+				</div>
+			</header>
+            <div class="training_notice row">
+				<div class="training_notice_panel col-xs-12">
+					<h3>👉👉👉請根據以下留言，勾選相同意圖與實體的一起訓練 (這邊文字要調)</h3>
+				</div>
+			</div>
+			<div class="training_panel_header row">
+				<div class="col-xs-offset-4 col-xs-3">
+                    <div class="select_label">
+						選擇 intent :
+					</div>
+					<select class="form-select" aria-label="Default select example" id="intent0">
+						<option selected>選擇 intent</option>
+						<option value="1">商品</option>
+						<option value="2">直播</option>
+						<option value="3">配送</option>
+						<option value="4">付款</option>
+						<option value="5">標數</option>
+					  </select>
+				</div>
+				<div class="col-xs-3">
+					<div class="select_label">
+						選擇 Entity :
+					</div>
+					<select class="form-select" aria-label="Default select example" id="entity0">
+						<option selected>選擇 entity</option>
+						<option value="1">商品</option>
+						<option value="2">價格</option>
+						<option value="3">付款方式</option>
+						<option value="4">配送方式</option>
+					  </select>
+				</div>
+				<div class="col-xs-2">
+					<button type="button" class="btn btn-info" id="train">確認訓練</button>
+				</div>
+			</div>
+
+			<div class="training_panel row">
+				<div class="col-xs-10 col-xs-offset-1 training_table">
+					<div class="training_header row">
+						<div class="header col-xs-12">
+							留言資料
+						</div>
+					</div>
+				{% for msg in message %}
+				    <div class="training_area row">
+					    <div class="form-check col-xs-12">
+						    <div class="row">
+							    <div class="col-xs-1">
+								    <input type="checkbox" text="{{msg.text}}" class="form-check-input" id="check{{forloop.counter0}}">
+							    </div>
+							    <div class="col-xs-11">
+								    <div class="comment">
+									    <label class="form-check-label" for="check{{forloop.counter0}}">
+										    {{msg.text}}
+									    </label> 
+								    </div>
+							    </div>
+						    </div>
+					    </div>
+				    </div>
+				{% endfor %}
+					
+				</div>
+			</div>
+	
+			</script-->
+			<!--網站公告 start -->
+			<div class="site-dialog server-billboard" style="display: none;">
+			<header class="site-dialog-header" style="padding: 20px 25px; border-bottom: 2px solid #e75280;line-height: 1; background-color: white;">
+				<h1 style="width: 15.8%;"><img src="https://s3.ap-northeast-2.amazonaws.com/jambolive.tv/static/console2/img/common/logo.png" alt="" title="JoJambo" style="width: 100%;"></h1>
+				<h2 class="page-title theme" style="font-size: 18px; border-left: 1px solid #e75280; padding-left: 15px; line-height: 1; margin-left: 15px;">
+				就醬播放送
+				</h2>
+			</header>
+			<div class="site-dialog-content" style="line-height: 180%; font-family: 'Microsoft Jhenghei', '微軟正黑體', 'Arial', sans-serif; font-size: 14px; color: #4c4c4c; padding: 10px 25px 40px 25px;">
+				<p></p>
+			</div>
+			<footer style="position: absolute; bottom: 65px; width: 100%; text-align: center;">
+				<input id = "billboard_read" type="checkbox" value= "" style="display: inline;">
+				<label for="billboard_read"> 我已經詳細閱讀此則訊息</label><br>
+				<input id = "user_id" type="hidden" value="24024" >
+			</footer>
+			</div>
+			<!-- 網站公告 end-->
+		</div>
+	</body>
+</html>

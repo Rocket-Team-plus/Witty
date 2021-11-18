@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<!--頁面設定-->
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link href="https://s3.ap-northeast-2.amazonaws.com/jambolive.tv/static/base/css/base.css?1600224987471" rel="stylesheet" type="text/css">
+		<script src="https://s3.ap-northeast-2.amazonaws.com/jambolive.tv/static/js/underscore/1.9.1/underscore-min.js"></script>
+		<script src="https://s3.ap-northeast-2.amazonaws.com/jambolive.tv/static/js/jquery/3.2.1/jquery-3.2.1.min.js"></script>
+		<script src="https://s3.ap-northeast-2.amazonaws.com/jambolive.tv/static/js/plugin.js"></script>
+		<script src="https://d3js.org/d3.v3.min.js"></script>
+
+		<!--前期準備-->
+		{%load static%}
+		<script src="{% static 'register_event.js' %}"></script>
+
+		<!--bootstrap & Jquery 放置處-->
+		<script src="../static/jquery-3.6.0.js"></script>
+		<script src="../static/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+		<link href="../static/bootstrap-3.3.7-dist/css/bootstrap.css" rel="stylesheet" type="text/css">
+
+		<!--datepicker套件放置處-->
+		<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+		<!--
+		<script src="https://s3.ap-northeast-2.amazonaws.com/jambolive.tv/static/console2/js/plugin.js"></script>
+		<script src="https://s3.ap-northeast-2.amazonaws.com/jambolive.tv/static/console2/js/manage.js"></script>
+		-->
+		<title>策略小助手</title>
+
+		<!--將csrf token建為全域變數，以供外部js檔使用-->
+		<script>
+			var CSRF_TOKEN = '{{ csrf_token }}';
+		</script>
+		<script>
+			$(document).ready(function(){
+
+			});
+		</script>
+        <style>
+            .form_iframe{
+                width:100%;
+                height:800px;
+
+                margin-bottom:10%;
+            }
+            .title{
+                margin-top:10%;
+
+                font-size:30px;
+            }
+            .emoji{
+                font-size:30px;
+            }
+        </style>
+	</head>
+	<body>
+		<div class="container">
+			<header class="site-header">
+				<div class="wrapper site-header-wrapper clear">                
+					<h1 class="site-logo">                    
+						<img src="https://s3.ap-northeast-2.amazonaws.com/jambolive.tv/static/console2/img/common/logo.png" alt="" title="">                
+					</h1>                
+					<h2 class="page-title theme">策 略 小 助 手</h2>        
+					<nav>          
+						<ul class="owner_head-tool float-l align-c">            
+							<li>              
+								<a href="/console/live/" target="_blank" class="btn-reg btn-nr f-line f-min">直播小幫手</a>            
+							</li>            
+							<li>              
+								<a href="/console/order/" target="_blank" class="btn-reg btn-nr f-line f-min">訂單小幫手</a>            
+							</li>           
+							<li>              
+								<a href="/console/ship/" target="_blank" class="btn-reg btn-nr f-line f-min">出貨小幫手</a>            
+							</li>            
+							<li>              
+								<a href="/fill_form/" target="_blank" class="btn-reg btn-nr f-line f-min">訂單小幫手</a>            
+							</li>
+							<li>              
+								<a href="/analysis/" target="_blank" class="btn-reg btn-nr f-line f-min">分析小幫手</a>            
+							</li>
+							<li>              
+								<a href="/training_data/" target="_blank" class="btn-reg btn-nr f-line f-min">訓練小幫手</a>            
+							</li>          
+						</ul><!--owner_head-tool end-->        
+					</nav>        
+					<div class="account float-r align-r">          
+						<div class="store-name theme ellipsis" style="font-size: 150%; font-weight: bold; padding-right: 8 px ;">張聚洋 </div>          
+						<div>張聚洋 您好（ <a href="/console/setting/">設定</a> / <span id="fb" style="cursor: pointer; color: #e75280;">切換帳號</span> ）          
+						</div>        
+					</div>      
+				</div>
+			</header>
+
+            <div class="form_header title">直播前商品資訊填寫表單</div>
+            <div class="form_header emoji">👇👇👇👇👇👇</div>
+            <iframe class="form_iframe" src="https://docs.google.com/forms/d/e/1FAIpQLSd6TEg5YGAJ8yyl9_fFLsQPy-H0Urxd3kz4k-GMGCoS-YH0rg/viewform?usp=sf_link" title="description"></iframe>
+	
+			</script-->
+			<!--網站公告 start -->
+			<div class="site-dialog server-billboard" style="display: none;">
+			<header class="site-dialog-header" style="padding: 20px 25px; border-bottom: 2px solid #e75280;line-height: 1; background-color: white;">
+				<h1 style="width: 15.8%;"><img src="https://s3.ap-northeast-2.amazonaws.com/jambolive.tv/static/console2/img/common/logo.png" alt="" title="JoJambo" style="width: 100%;"></h1>
+				<h2 class="page-title theme" style="font-size: 18px; border-left: 1px solid #e75280; padding-left: 15px; line-height: 1; margin-left: 15px;">
+				就醬播放送
+				</h2>
+			</header>
+			<div class="site-dialog-content" style="line-height: 180%; font-family: 'Microsoft Jhenghei', '微軟正黑體', 'Arial', sans-serif; font-size: 14px; color: #4c4c4c; padding: 10px 25px 40px 25px;">
+				<p></p>
+			</div>
+			<footer style="position: absolute; bottom: 65px; width: 100%; text-align: center;">
+				<input id = "billboard_read" type="checkbox" value= "" style="display: inline;">
+				<label for="billboard_read"> 我已經詳細閱讀此則訊息</label><br>
+				<input id = "user_id" type="hidden" value="24024" >
+			</footer>
+			</div>
+			<!-- 網站公告 end-->
+		</div>
+	</body>
+</html>
