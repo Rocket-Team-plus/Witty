@@ -12,6 +12,7 @@
 		src="https://s3.ap-northeast-2.amazonaws.com/jambolive.tv/static/js/jquery/3.2.1/jquery-3.2.1.min.js"></script>
 	<script src="https://s3.ap-northeast-2.amazonaws.com/jambolive.tv/static/js/plugin.js"></script>
 	<script src="https://d3js.org/d3.v3.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
 
 	<!--前期準備-->
 	{%load static%}
@@ -59,8 +60,12 @@
 			<h1 class="site-logo">
 				<img src="{% static 'img/witty_arial_logo.png' %}" alt="Witty" title="Witty">
 			</h1>
-
-			<h2 class="page-title theme">策 略 小 助 手</h2>
+			
+			<h2 class="page-title theme ml1">
+				<span class="line line1"></span>
+				<span class="letters">策略小助手</span>
+				<span class="line line2"></span>
+			</h2>
 			<nav>
 				<ul class="owner_head-tool float-l align-c">
 					<li>
@@ -224,7 +229,7 @@
 						aria-labelledby="profile-tab">
 						<!--放靜態數據表-->
 						<div class="data row">
-							<div class="col-xs-12 col-sm-6 picture">
+							<div class="col-xs-12 col-sm-6 picture .hover">
 								<div class="title">單場直播商品銷售分析<span data-hover="點選下拉式選單可選取直播場次
 									<br> 將會顯示各場直播商品銷售數據"><img class="help-img"
 									src="{% static 'img/question-mark.png' %}"></span>
@@ -293,7 +298,7 @@
 								</div>
 							</div>
 
-							<div class="col-xs-12 col-sm-6 picture">
+							<div class="col-xs-12 col-sm-6 picture hover">
 								<div class="title">單場直播留言互動表現<span data-hover=" 點選下拉式選單可選擇場次
 										<br>選擇點選圖表上的標數可以取消顯示該標數"><img class="help-img"
 										src="{% static 'img/question-mark.png' %}"></span>
