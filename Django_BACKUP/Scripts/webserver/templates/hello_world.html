@@ -50,6 +50,8 @@
 	<link rel="stylesheet" href="{% static 'css/base.css' %}">
 	<link rel="stylesheet" href="{% static 'css/analysis.css'%}">
 	<link rel="stylesheet" href="{% static 'css/chart.css'%}">
+	<link rel="stylesheet" href="{% static 'css/hover_focus.css'%}">
+	<script src="{% static 'js/hover_focus.js' %}"></script>
 
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 </head>
@@ -131,7 +133,7 @@
 							<!--放靜態數據表-->
 							<div class="data row">
 								<div class="col-xs-12">
-									<div class="title">直播貼文總體數據表現 <span><img class="help-img" data-hover="可以透過下拉式選單選擇欲顯示的筆數
+									<div class="title">直播貼文總體數據表現 <span><img class="help-img img-circle img-responsive" data-hover="可以透過下拉式選單選擇欲顯示的筆數
 										<br> 並且可透過點選表格上方的指標選擇以何種方式進行排列
 										<br> 右方搜尋列可直接搜尋任意想要的文字，只要指標符合搜尋文字即可"
 												src=" "></span>
@@ -154,7 +156,7 @@
 									<div class="title">
 										<p data-hover="請輸入起始時間與結束時間並選擇想檢視的指標 
 										<br> 可以透過點選圖表上方指標將指標隱藏">臉書貼文總體表現<span data-hover="點選下拉式選單可選取直播場次
-										<br> 將會顯示各場直播商品銷售數據"><img class="help-img"
+										<br> 將會顯示各場直播商品銷售數據"><img class="help-img img-circle img-responsive"
 													src="{% static 'img/question-mark.png' %}"></span>
 										</p>
 									</div>
@@ -231,7 +233,7 @@
 						<div class="data row">
 							<div class="col-xs-12 col-sm-6 picture .hover">
 								<div class="title">單場直播商品銷售分析<span data-hover="點選下拉式選單可選取直播場次
-									<br> 將會顯示各場直播商品銷售數據"><img class="help-img"
+									<br> 將會顯示各場直播商品銷售數據"><img class="help-img img-circle img-responsive"
 									src="{% static 'img/question-mark.png' %}"></span>
 								</div>
 								<div class="picture_display">
@@ -300,7 +302,7 @@
 
 							<div class="col-xs-12 col-sm-6 picture hover">
 								<div class="title">單場直播留言互動表現<span data-hover=" 點選下拉式選單可選擇場次
-										<br>選擇點選圖表上的標數可以取消顯示該標數"><img class="help-img"
+										<br>選擇點選圖表上的標數可以取消顯示該標數"><img class="help-img img-circle img-responsive"
 										src="{% static 'img/question-mark.png' %}"></span>
 								</div>
 								<div class="picture_display">
@@ -316,7 +318,7 @@
 							</div>
 							<div class="col-xs-12 col-sm-12 picture">
 								<div class="title">多場直播留言互動表現<span data-hover="點選下拉式選單可選取直播場次
-									<br> 將會顯示各場直播商品銷售數據"><img class="help-img"
+									<br> 將會顯示各場直播商品銷售數據"><img class="help-img img-circle img-responsive"
 									src="{% static 'img/question-mark.png' %}"></span>
 								</div>
 								<div class="picture_display">
