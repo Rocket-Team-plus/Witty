@@ -5,8 +5,10 @@
     <!--頁面設定-->
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="https://s3.ap-northeast-2.amazonaws.com/jambolive.tv/static/js/underscore/1.9.1/underscore-min.js"></script>
-    <script src="https://s3.ap-northeast-2.amazonaws.com/jambolive.tv/static/js/jquery/3.2.1/jquery-3.2.1.min.js"></script>
+    <script
+        src="https://s3.ap-northeast-2.amazonaws.com/jambolive.tv/static/js/underscore/1.9.1/underscore-min.js"></script>
+    <script
+        src="https://s3.ap-northeast-2.amazonaws.com/jambolive.tv/static/js/jquery/3.2.1/jquery-3.2.1.min.js"></script>
     <script src="https://s3.ap-northeast-2.amazonaws.com/jambolive.tv/static/js/plugin.js"></script>
     <script src="https://d3js.org/d3.v3.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
@@ -17,7 +19,6 @@
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
     <link rel="stylesheet" href="{% static 'css/training.css'%}">
     <link rel="stylesheet" href="{% static 'css/hover_focus.css'%}">
-    <script src="{% static 'js/register_event.js' %}"></script>
     <script src="{% static 'js/fixed_header.js' %}">
     </script>
     <script src="{% static 'js/hover_focus.js' %}"></script>
@@ -38,11 +39,6 @@
     <script>
         var CSRF_TOKEN = '{{ csrf_token }}';
     </script>
-    <script>
-        $(document).ready(function() {
-            del_data();
-        });
-    </script>
 </head>
 
 <body>
@@ -60,13 +56,16 @@
             <nav>
                 <ul class="owner_head-tool float-l align-c">
                     <li>
-                        <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" class="btn-reg btn-nr f-line f-lg">直播小幫手</a>
+                        <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank"
+                            class="btn-reg btn-nr f-line f-lg">直播小幫手</a>
                     </li>
                     <li>
-                        <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" class="btn-reg btn-nr f-line f-lg">訂單小幫手</a>
+                        <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank"
+                            class="btn-reg btn-nr f-line f-lg">訂單小幫手</a>
                     </li>
                     <li>
-                        <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" class="btn-reg btn-nr f-line f-lg">出貨小幫手</a>
+                        <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank"
+                            class="btn-reg btn-nr f-line f-lg">出貨小幫手</a>
                     </li>
                     <li>
                         <a href="/fill_form/" target="_blank" class="btn-reg btn-nr f-line f-lg">表單小幫手</a>
@@ -82,7 +81,8 @@
             </nav>
             <div class="account float-r align-r">
                 <div class="store-name theme ellipsis f-xlg f-bold" style=" padding-right: 8 px ;">嗚依替 </div>
-                <div> <a href="/console/setting/">設定</a> / <span id="fb" style="cursor: pointer; color: #4285F4;">切換帳號</span>
+                <div> <a href="/console/setting/">設定</a> / <span id="fb"
+                        style="cursor: pointer; color: #4285F4;">切換帳號</span>
                 </div>
             </div>
         </div>
@@ -92,7 +92,7 @@
             <div class="col-xs-6 col-sm-2 col-md-2 col-lg-2">
             </div>
             <div class="col-xs-12 col-sm-10 col-md-10 col-lg-10">
-                <input type="text" id="searchInput" placeholder="搜尋留言">
+                <input type="search" class="light-table-filter" data-table="comment-table" id="searchInput" placeholder="搜尋留言">
             </div>
         </div>
         <div class="main-container row">
@@ -109,9 +109,16 @@
                         <div class="col-xs-2">
                             <input type="checkbox" class="comment-check-box simple-focus" id="clickAll" title="全選">
                         </div>
-                        <div class="training_panel_header row ">
+                        <div class="col-xs-2">
+                        </div>
+                        <div class="col-xs-8 training_panel_header row ">
+                            <div class="col-xs-2"></div>
+                            <div class="col-xs-2"></div>
+                            <div class="col-xs-2"></div>
+                            <div class="col-xs-1"></div>
                             <div class="col-xs-2 ">
-                                <select class="form-select " aria-label="Default select example " id="intent0 ">
+                                <label>意圖：</label>
+                                <select class="form-select " aria-label="Default select example " id="intent0">
                                     <option selected>選擇 intent</option>
                                     <option value="1 ">商品</option>
                                     <option value="2 ">直播</option>
@@ -120,40 +127,51 @@
                                     <option value="5 ">標數</option>
                                 </select>
                             </div>
-                            <div class="col-xs-2 "> 
-                                <select class="form-select " aria-label="Default select example " id="entity0 ">
+                            <div class="col-xs-2 ">
+                                <label>實體：</label>
+                                <select class="form-select " aria-label="Default select example " id="entity0">
                                     <option selected>選擇 entity</option>
                                     <option value="1 ">商品</option>
                                     <option value="2 ">價格</option>
                                     <option value="3 ">付款方式</option>
                                     <option value="4 ">配送方式</option>
-                                  </select>
+                                </select>
                             </div>
                             <div class="col-xs-1 ">
-                                <button type="button " class="btn btn-info " id="train ">確認訓練</button>
+                                <button type="button" class=" btn-witty simple-focus btn" id="train">確認訓練</button>
                             </div>
                         </div>
                     </div>
                 </header>
                 <div class="training_panel row scrollable">
-                    {% for msg in message %}
-                    <div class="training_area row ">
-                        <div class="form-check col-xs-12 ">
-                            <div class="row ">
-                                <div class="col-xs-1 checkbox-bar">
-                                    <input type="checkbox" text="{{msg.text}} " class="form-check-input simple-focus" id="check{{forloop.counter0}} ">
-                                </div>
-                                <div class="col-xs-9 ">
-                                    <div class="comment">
-                                        <label class="form-check-label " for="check{{forloop.counter0}} ">
-                                            {{msg.text}}
-                                        </label>
+                    <!-- {% for msg in message %}
+                    {% endfor %} -->
+                    <table class="comment-table">
+                        <tbody>
+                            {% for msg in message %}
+                            <tr>
+                                <td class="comment-td">
+                                    <div class="training_area row ">
+                                        <div class="form-check col-xs-12 ">
+                                            <div class="row ">
+                                                <div class="col-xs-1 checkbox-bar">
+                                                    <input type="checkbox" text="{{msg.text}} " class="form-check-input simple-focus" id="check{{forloop.counter0}} ">
+                                                </div>
+                                                <div class="col-xs-9 ">
+                                                    <div class="comment">
+                                                        <label class="form-check-label " for="check{{forloop.counter0}} ">
+                                                            {{msg.text}}
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    {% endfor %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>

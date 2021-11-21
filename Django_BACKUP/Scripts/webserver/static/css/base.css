@@ -78,7 +78,8 @@ button{background-color: transparent;cursor: pointer;}
 .btn-w-bar{position: absolute;right: 0;top: 0;height: 100%;border-radius: 0;}
 .btn-icon.btn-lg{padding: 0 5px; }
 .btn-icon.btn-lg span{position: relative;top: -5px;}
-
+.btn-witty{background:#4285f4;color:#fff;}
+.btn-witty:hover{background:#4285f4;color:#fff !important;}
 /*icon*/
 @font-face{font-family:'manage';src:url('fonts/manage.eot?9jc5vn');src:url('fonts/manage.eot?9jc5vn#iefix') format('embedded-opentype'), url('fonts/manage.ttf?9jc5vn') format('truetype'), url('fonts/manage.woff?66xxv1') format('woff'), url('fonts/manage.svg?66xxv1#manage') format('svg');font-weight:normal;font-style:normal;}
 [class^="icon-"], [class*=" icon-"]{ font-family:'manage' !important;font-style:normal;font-weight:normal;font-variant:normal;text-transform:none;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}

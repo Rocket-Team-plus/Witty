@@ -2,13 +2,14 @@
 const COLORS = [
     '#4dc9f6',
     '#f67019',
-    '#f53794',
+    '#378888',
     '#537bc4',
     '#acc236',
     '#166a8f',
     '#00a950',
     '#58595b',
     '#8549ba'
+
 ];
 
 var streaming_stack_bar_chart = null;
@@ -1020,13 +1021,13 @@ const single_gender_config = (single_gender_data) => {
     // <block:config:0>
     const single_gender_config = {
         display: true,
-        type: 'doughnut',
+        type: 'bar',
         data: single_gender_data,
         options: {
             plugins: {
                 title: {
                     display: true,
-                    text: '單場次性別比例圓餅圖',
+                    text: '單場次性別比例長條圖',
                     font: {
                         size: 18
                     }
@@ -1180,13 +1181,13 @@ const mutiple_gender_config = (mutiple_gender_data) => {
     // <block:config:0>
     const mutiple_gender_config = {
         display: true,
-        type: 'pie',
+        type: 'bar',
         data: mutiple_gender_data,
         options: {
             plugins: {
                 title: {
                     display: true,
-                    text: '多場次平均性別比例圓餅圖',
+                    text: '多場次平均性別比例長條圖',
                     font: {
                         size: 18
                     }

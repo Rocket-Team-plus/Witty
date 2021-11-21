@@ -30,6 +30,25 @@ body {
     opacity: 0.9;
 }
 
+#searchInput:focus{
+    width: 100%;
+    height: max-content;
+    margin: 10px 0;
+    border:1px solid #40585d;
+    border-radius: 30px;
+    font-size: 25px;
+    background-color: #fff;
+    background-image: url('https://cdn2.iconfinder.com/data/icons/ios-7-icons/50/search-24.png');
+    background-position: 10px 7px;
+    background-repeat: no-repeat;
+    padding: 8px 20px 8px 40px;
+    -webkit-transition: width 0.8s ease-in-out;
+    transition: width 0.8s ease-in-out;
+    outline: none;
+    opacity: 1;
+    box-shadow: 0 0 5px black;
+}
+
 .main-container {
     background-color: transparent;
     width: 100%;
@@ -156,6 +175,10 @@ input[type=checkbox]:checked {
     margin-top: 10%;
 }
 
+.training_panel_header{
+    text-align: right;
+}
+
 .row {
     width: 100%;
 }
@@ -224,4 +247,8 @@ input[type=checkbox]:checked {
     color: white;
     transform: translate3d(3px, 3px, 0px);
     box-shadow: 7px 7px rgba(77, 77, 77, 0.5);
+}
+
+.comment-table{
+    width:100%;
 }
