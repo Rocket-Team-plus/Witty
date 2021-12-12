@@ -11,12 +11,12 @@ $("#clickAll").click(function () {
                 "background-color": "#C2DBFF",
             });
             if ($(this).hasClass("checked")) {
-    
+
             }
             else {
                 //所有的checkbox click事件
                 $(this).addClass("checked");
-    
+
                 console.log("Check Click");
             }
         });
@@ -29,7 +29,7 @@ $("#clickAll").click(function () {
             if ($(this).hasClass("checked")) {
 
                 $(this).removeClass("checked");
-    
+
             }
         });
     }
@@ -133,8 +133,8 @@ const del_data = () => {
         else {
             comment_array.forEach(function (value) {
                 //conversion
-                intent_val = parseInt(intent_val,10);
-                entity_val = parseInt(entity_val,10);
+                intent_val = parseInt(intent_val, 10);
+                entity_val = parseInt(entity_val, 10);
                 //alert("Your " + value + " is trained in " + intent[intent_val] + " intent and " + entity[entity_val] + " entity.");
                 training(value, intent[intent_val], entity[entity_val]);
                 console.log($(".checked").parent().parent());
@@ -210,3 +210,19 @@ const training = (comment, intent, entity) => {
 }
 
 del_data();
+
+//For the pop up animation for training document.
+
+$('.btn-help').on('click', function () {
+    $('#item1').popup({
+        time: 100,
+        classAnimateShow: 'slideInUp',
+        classAnimateHide: 'fadeOut',
+        onPopupClose: function e() {
+            // console.log('0')
+        },
+        onPopupInit: function e() {
+            // console.log('1')
+        }
+    });
+});

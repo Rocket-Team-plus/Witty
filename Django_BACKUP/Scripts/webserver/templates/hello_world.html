@@ -232,8 +232,8 @@
 						<!--放靜態數據表-->
 						<div class="data row">
 							<div class="col-xs-12 col-sm-6 picture .hover">
-								<div class="title">單場直播商品銷售分析<span data-hover="點選下拉式選單可選取直播場次
-									<br> 將會顯示各場直播商品銷售數據"><img class="help-img img-circle img-responsive"
+								<div class="title">周次商品販賣排行榜<span data-hover="點選下拉式選單可選取直播場次
+									<br> 將會顯示各周直播商品銷售數據"><img class="help-img img-circle img-responsive"
 									src="{% static 'img/question-mark.png' %}"></span>
 								</div>
 								<div class="picture_display">
@@ -243,56 +243,75 @@
 										</select>
 									</div>
 									<div class="data-content table_content">
-										<table class="table">
+										<table class="table" style="font-size:25px; border:1px solid #c3c3c3;">
 											<thead>
-												<tr>
-													<th scope="col">商品編號</th>
+												<tr class="table-primary" style="background-color:#b8daff">
+													<th scope="col">周排名</th>
+													<th scope="col">商品販售場次</th>
 													<th scope="col">商品名稱</th>
 													<th scope="col">銷售量</th>
 												</tr>
 											</thead>
 											<tbody>
 												<tr>
-													<th scope="row">1</th>
-													<td>C7093</td>
+													<th scope="row" class="table-success" style="background-color:yellow">1</th>
+													<td>2021/09/03春裝場</td>
 													<td>韓系牛仔褲</td>
 													<td>23000</td>
 												</tr>
 												<tr>
-													<th scope="row">2</th>
-													<td>D6025</td>
+													<th scope="row" table="table-info" style="background-color:aquamarine">2</th>
+													<td>2021/09/03春裝場</td>
 													<td>膨膨紅色裙子</td>
-													<td>34000</td>
+													<td>20000</td>
 												</tr>
 												<tr>
-													<th scope="row">3</th>
-													<td>F7103</td>
+													<th scope="row" table="table-warning" style="background-color:blanchedalmond">3</th>
+													<td>2021/09/03春裝場</td>
 													<td>超好看的鞋子</td>
-													<td>27800</td>
+													<td>19000</td>
 												</tr>
 												<tr>
 													<th scope="row">4</th>
-													<td>G2223</td>
+													<td>2021/09/03春裝場</td>
 													<td>超好看的帽子</td>
-													<td>25500</td>
+													<td>18000</td>
 												</tr>
 												<tr>
 													<th scope="row">5</th>
-													<td>K2903</td>
+													<td>2021/09/05禮品場</td>
 													<td>超好看的項鍊</td>
-													<td>88800</td>
+													<td>15000</td>
 												</tr>
 												<tr>
 													<th scope="row">6</th>
-													<td>P5765</td>
+													<td>2021/09/05禮品場</td>
 													<td>王辰君的背包</td>
-													<td>67840</td>
+													<td>12000</td>
 												</tr>
 												<tr>
 													<th scope="row">7</th>
-													<td>O2233</td>
+													<td>2021/09/05禮品場</td>
 													<td>飛天魔毯</td>
-													<td>69000</td>
+													<td>11000</td>
+												</tr>
+												<tr>
+													<th scope="row">8</th>
+													<td>2021/09/10特賣場</td>
+													<td>神之水</td>
+													<td>6900</td>
+												</tr>
+												<tr>
+													<th scope="row">9</th>
+													<td>2021/09/10特賣場</td>
+													<td>不是吧你連這個也賣?</td>
+													<td>6000</td>
+												</tr>
+												<tr>
+													<th scope="row">10</th>
+													<td>2021/09/10特賣場</td>
+													<td>你要買我也不阻止啦</td>
+													<td>600</td>
 												</tr>
 											</tbody>
 										</table>
@@ -340,6 +359,37 @@
 					<div class="tab-pane fade active in col-xs-12" role="tabpanel" id="user" aria-labelledby="user-tab">
 						<!--放靜態數據表-->
 						<div class="data">
+							<!--付款-->
+							<div class="col-sm-6 picture">
+								<div class="title">單場直播付款表現</div>
+								<div class="picture_display">
+									<div class="form-select-bar">
+										<select class="form-select form-select-lg mb-3"
+											aria-label=".form-select-lg example" id="payment_select">
+
+										</select>
+									</div>
+									<div class="data-content">
+										<canvas class="chart_js  pie_chart" id="payment_term_pie_chart"></canvas>
+									</div>
+								</div>
+							</div>
+							<div class="col-sm-6 picture">
+								<div class="title">多場直播付款表現</div>
+								<div class="picture_display">
+									<div class="form-select-bar">
+										<p class="header-select ">起始時間 : </p>
+										<input type="text" id="begin3" class="header-select">
+										<p class="header-select">~</p>
+										<p class="header-select"> 結束時間 : </p>
+										<input type="text" id="end3" class="header-select">
+										<button class="btn btn-primary header-select chart-btn" id="time3">送出</button>
+									</div>
+									<div class="data-content">
+										<canvas class="chart_js" id="payment_term_bar_chart"></canvas>
+									</div>
+								</div>
+							</div>
 							<!--配送-->
 							<div class="col-sm-6 picture">
 								<div class="title">單場直播配送表現</div>
@@ -371,34 +421,44 @@
 									</div>
 								</div>
 							</div>
-							<!--付款-->
+							<!--退貨機制與倉儲表現-->
 							<div class="col-sm-6 picture">
-								<div class="title">單場直播付款表現</div>
+								<div class="title">單月直播退貨比例</div>
 								<div class="picture_display">
 									<div class="form-select-bar">
 										<select class="form-select form-select-lg mb-3"
-											aria-label=".form-select-lg example" id="payment_select">
-
+											aria-label=".form-select-lg example">
+                                            <option value="1">1月</option>
+											<option value="2">2月</option>
+											<option value="3">3月</option>
+											<option value="4">4月</option>
+											<option value="5">5月</option>
+											<option value="6">6月</option>
+											<option value="7">7月</option>
+											<option value="8">8月</option>
+											<option value="9">9月</option>
+											<option value="10">10月</option>
+											<option value="11">11月</option>
+											<option value="12">12月</option>
 										</select>
 									</div>
 									<div class="data-content">
-										<canvas class="chart_js  pie_chart" id="payment_term_pie_chart"></canvas>
+										<canvas class="chart_js  pie_chart" id="return_delivery_pie_chart"></canvas>
 									</div>
 								</div>
 							</div>
 							<div class="col-sm-6 picture">
-								<div class="title">多場直播付款表現</div>
+								<div class="title">半年期存貨周轉率</div>
 								<div class="picture_display">
 									<div class="form-select-bar">
-										<p class="header-select ">起始時間 : </p>
-										<input type="text" id="begin3" class="header-select">
-										<p class="header-select">~</p>
-										<p class="header-select"> 結束時間 : </p>
-										<input type="text" id="end3" class="header-select">
-										<button class="btn btn-primary header-select chart-btn" id="time3">送出</button>
+										<select class="form-select form-select-lg mb-3"
+											aria-label=".form-select-lg example">
+                                            <option value="1">上半年</option>
+											<option value="1">上半年</option>
+										</select>
 									</div>
 									<div class="data-content">
-										<canvas class="chart_js" id="payment_term_bar_chart"></canvas>
+										<canvas class="chart_js" id="goods_turnover_chart"></canvas>
 									</div>
 								</div>
 							</div>
@@ -451,7 +511,7 @@
 								</thead>
 								<tbody>
 									<tr>
-										<th>我有加單到嗎????</th>
+										<th>我有加單到嗎?</th>
 									</tr>
 									<tr>
 										<th>皺術電影版什麼時候上映啊???</th>

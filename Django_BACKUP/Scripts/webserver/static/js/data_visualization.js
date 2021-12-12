@@ -19,6 +19,8 @@ var delivery_term_pie_chart = null;
 var delivery_term_bar_chart = null;
 var payment_term_pie_chart = null;
 var payment_term_bar_chart = null;
+var return_delivery_pie_chart = null;
+var goods_turnover_bar_chart = null;
 var drop_bar_chart = null;
 var drop_pie_chart = null;
 var single_gender_chart = null;
@@ -455,7 +457,7 @@ const orders_line_chart_data = (streaming_datas) => {
                     'rgba(153, 102, 255, 1)',
                     'rgba(255, 159, 64, 1)',
                 ],
-                backgroundColor: CHART_COLORS.red
+                backgroundColor: COLORS
             },
         ]
     };
@@ -511,7 +513,7 @@ const delivery_term_pie_data = (streaming_datas) => {
             {
                 label: '配送分布比例',
                 data: delivery_amounts,
-                backgroundColor: CHART_COLORS.red,
+                backgroundColor: COLORS,
             },
         ]
     };
@@ -532,7 +534,7 @@ const delivery_term_pie_config = (delivery_term_pie_data) => {
             plugins: {
                 title: {
                     display: true,
-                    text: '單場次付款方式比例圓餅圖',
+                    text: '單場次配送方式比例圓餅圖',
                     font: {
                         size: 18
                     }
@@ -571,7 +573,8 @@ const delivery_term_bar_chart_data = (streaming_datas) => {
 
     //payment term bar chart
     const delivery_term_bar_data = {
-        datasets: []
+        datasets: [],
+        backgroundColor: COLORS,
     };
 
     //資料新增的For迴圈
@@ -595,7 +598,7 @@ const delivery_term_bar_config = (delivery_term_bar_data) => {
             plugins: {
                 title: {
                     display: true,
-                    text: '各場次付款方式比例圖',
+                    text: '各場次配送方式比例圖',
                     font: {
                         size: 18
                     }
@@ -676,7 +679,7 @@ const payment_term_pie_data = (streaming_datas) => {
             {
                 label: '付款比例',
                 data: payment_amounts,
-                backgroundColor: CHART_COLORS.red,
+                backgroundColor: [CHART_COLORS.red,CHART_COLORS.green,CHART_COLORS.blue,CHART_COLORS.yellow],
             },
         ]
     };
@@ -734,7 +737,8 @@ const payment_term_bar_chart_data = (streaming_datas) => {
 
     //payment term bar chart
     const payment_term_bar_data = {
-        datasets: []
+        datasets: [],
+        backgroundColor: [CHART_COLORS.red,CHART_COLORS.green,CHART_COLORS.blue,CHART_COLORS.yellow],
     };
 
     //資料新增的For迴圈
@@ -821,6 +825,182 @@ const payment_term_bar_config = (payment_term_bar_data) => {
     var payment_term_bar_ctx = document.getElementById('payment_term_bar_chart').getContext('2d');
     canvas_resize('payment_term_bar_chart');
     payment_term_bar_chart = new Chart(payment_term_bar_ctx, payment_term_bar_config);
+
+}
+
+const return_delivery_pie_data = () => {
+
+    //payment pie chart
+    const return_delivery_pie_data = {
+        labels: ['超商退貨','宅配退貨','商城退貨'],
+        //labels: ['Red', 'Orange', 'Yellow', 'Green', 'Blue'],
+        datasets: [
+            {
+                label: '退貨比例',
+                data: [40,50,10],
+                backgroundColor: [CHART_COLORS.red,CHART_COLORS.green,CHART_COLORS.blue,CHART_COLORS.yellow],
+            },
+        ]
+    };
+    // </block:setup>
+
+    return_delivery_pie_config(return_delivery_pie_data);
+
+}
+
+const return_delivery_pie_config = (return_delivery_pie_data) => {
+
+    // <block:config:0>
+    const return_delivery_pie_config = {
+        display: true,
+        type: 'pie',
+        data: return_delivery_pie_data,
+        options: {
+            plugins: {
+                title: {
+                    display: true,
+                    text: '退貨方式比例圓餅圖',
+                    font: {
+                        size: 18
+                    }
+                },
+                legend: {
+                    position: 'right',
+                    labels: {
+                        // This more specific font property overrides the global property
+                        font: {
+                            size: 18
+                        }
+                    }
+                },
+            },
+
+            responsive: true,
+            maintainAspectRatio: false,
+
+        }
+    };
+
+    if (return_delivery_pie_chart) {
+        return_delivery_pie_chart.destroy();
+    }
+    var return_delivery_pie_ctx = document.getElementById('return_delivery_pie_chart').getContext('2d');
+
+    return_delivery_pie_chart = new Chart(return_delivery_pie_ctx, return_delivery_pie_config);
+    canvas_resize('return_delivery_pie_chart');
+
+}
+
+const goods_turnover_bar_data = () => {
+    //drop proportion bar chart
+    const goods_turnover_bar_data = {
+        labels: ['7月周轉率', '8月周轉率', '9月周轉率', '10月周轉率', '11月周轉率'],
+        datasets: [{
+            type: 'bar',
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)',
+                'rgba(201, 203, 207,0.2)'
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)',
+                'rgba(201, 203, 207,1)'
+            ],
+            borderWidth: 1,
+            label: '周轉比例',
+            data: [43, 54, 33, 46, 55]
+        }]
+    };
+    // </block:setup>
+
+    goods_turnover_bar_config(goods_turnover_bar_data);
+
+}
+
+const goods_turnover_bar_config = (goods_turnover_bar_data) => {
+
+
+    // <block:config:0>
+    const goods_turnover_bar_config = {
+        display: true,
+        type: 'bar',
+        data: goods_turnover_bar_data,
+        options: {
+            plugins: {
+                title: {
+                    display: true,
+                    text: '各場次周轉率比例圖',
+                    font: {
+                        size: 18
+                    }
+                },
+                legend: {
+                    position: 'top',
+                    labels: {
+                        // This more specific font property overrides the global property
+                        font: {
+                            size: 18
+                        }
+                    }
+                },
+            },
+            scales: {
+                x: {
+                    display: true,
+                    title: {
+                        display: true,
+                        text: '場次',
+                        color: '#073888',
+                        font: {
+                            family: 'Comic Sans MS',
+                            size: 20,
+                            weight: 'bold',
+                            lineHeight: 1.2,
+                        },
+                        padding: { top: 20, left: 0, right: 0, bottom: 0 }
+                    }
+                },
+
+                y: {
+                    display: true,
+                    title: {
+                        display: true,
+                        text: '比例',
+                        color: '#4285F4',
+                        font: {
+                            family: 'Comic Sans MS',
+                            size: 20,
+                            weight: 'bold',
+                            lineHeight: 1.2,
+                        },
+                        padding: { top: 30, left: 0, right: 0, bottom: 0 }
+                    },
+                    min: 0,
+                    max: 100,
+                }
+            },
+            responsive: true,
+            maintainAspectRatio: false,
+        }
+    };
+
+    if (goods_turnover_bar_chart) {
+        console.log("Hi");
+        goods_turnover_bar_chart.destroy();
+    }
+
+    var goods_turnover_bar_ctx = document.getElementById('goods_turnover_chart').getContext('2d');
+    canvas_resize('goods_turnover_chart');
+    goods_turnover_bar_chart = new Chart(goods_turnover_bar_ctx, goods_turnover_bar_config);
 
 }
 
@@ -934,7 +1114,7 @@ const drop_pie_data = (streaming_datas) => {
             {
                 label: '棄單比例',
                 data: status_amounts,
-                backgroundColor: Object.values(CHART_COLORS),
+                backgroundColor: [CHART_COLORS.red,CHART_COLORS.green,CHART_COLORS.blue,CHART_COLORS.yellow],
             },
         ]
     };
@@ -1110,7 +1290,7 @@ const single_age_config = (single_age_data) => {
             plugins: {
                 title: {
                     display: true,
-                    text: '單場次年齡比例圓餅圖',
+                    text: '單場次年齡比例直條圖',
                     font: {
                         size: 18
                     }
@@ -1253,11 +1433,16 @@ const mutiple_age_data = (streaming_datas) => {
         labels: ['20-30', '30-40', '40-50', '50-60', '60-70'],
         datasets: [
             {
-                label: '年齡比例',
-                data: [twenty_to_thirty_ratio, thirty_to_forty_ratio, forty_to_fifty_ratio,
-                    fifty_to_sixty_ratio, sixty_to_seventy_ratio],
+                label: '年齡比例(%)',
+                data: [twenty_to_thirty_ratio*100, thirty_to_forty_ratio*100, forty_to_fifty_ratio*100,
+                    fifty_to_sixty_ratio*100, sixty_to_seventy_ratio*100],
                 backgroundColor: Object.values(CHART_COLORS),
                 hoverOffset: 4
+            },
+            {
+                type: 'line',
+                label: '消費力(萬)',
+                data: [11, 67, 75, 54, 32]
             },
         ],
 
@@ -1279,7 +1464,7 @@ const mutiple_age_config = (mutiple_age_data) => {
             plugins: {
                 title: {
                     display: true,
-                    text: '多場次平均年齡比例圓餅圖',
+                    text: '多場次平均年齡比例直條圖',
                     font: {
                         size: 18
                     }

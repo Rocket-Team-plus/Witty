@@ -49,7 +49,7 @@ const fill_in_select = () => {
         url: "get_index/",
         // on success
         success: function (response) {
-            console.log(response);
+    
             for (let i = 0; i < response.length; i++) {
                 $(".form-select").append(
                     '<option value=' + response[i].id + '>'
@@ -76,7 +76,7 @@ const instant_data = () => {
             url: "get_instant_data/",
             // on success
             success: function (response) {
-                console.log("Get instant data : " + response);
+                
             },
             // on error
             error: function (response) {
@@ -108,8 +108,9 @@ const trigger_default_chart = () =>{
     $('.chart-btn').each(function(){
         $(this).trigger('click');
     });
-    
-    
+
+    goods_turnover_bar_data();
+    return_delivery_pie_data();
 }
 
 //當select值有所改變，回傳相應直播場次的資料
@@ -147,7 +148,7 @@ const product_select_change = () => {
             success: function (response) {
                 //回傳結果 array
                 response.forEach(function (value) {
-                    console.log(value.name);
+                    
                 });
             },
             // on error
@@ -201,6 +202,7 @@ const delivery_select_change = () => {
         if(!data){
             data = 1;
         }
+        console.log(data)
         //csrf_token確認cookie
         //let csrftoken = '{{ csrf_token }}'
 
@@ -229,6 +231,7 @@ const payment_select_change = () => {
     //呼叫本場直播配送與付款方式計算
     $("#payment_select").change(function () {
         var data = $(this).val();
+        console.log(data);
         //csrf_token確認cookie
         //let csrftoken = '{{ csrf_token }}'
         if(!data){
@@ -261,6 +264,7 @@ const preorder_select_change = () => {
         if(!data){
             data = 1;
         }
+        console.log(data);
         //csrf_token確認cookie
         //let csrftoken = '{{ csrf_token }}'
 
@@ -293,7 +297,7 @@ const gender_select_change = () => {
         if(!data){
             data = 1;
         }
-        console.log(data);
+
         //csrf_token確認cookie
         //let csrftoken = '{{ csrf_token }}'
 
@@ -326,7 +330,7 @@ const age_select_change = () => {
         if(!data){
             data = 1;
         }
-        console.log(data);
+
         //csrf_token確認cookie
         //let csrftoken = '{{ csrf_token }}'
 
@@ -484,7 +488,7 @@ const chronic_order_time = () => {
             begin_time = '2021-06-17';
             end_time = '2021-11-29';
         }
-        console.log(begin_time);
+        
 
         $.ajax({
             type: "POST",

@@ -32,6 +32,7 @@
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="{% static 'css/animate.min.css' %}">
 
     <title>策略小助手</title>
 
@@ -87,12 +88,18 @@
             </div>
         </div>
     </header>
+
+    <div id="item1" class="item"> 這是回音你懂嗎<br>是回音你懂嗎<br>回音你懂嗎<br>音你懂嗎<br>你懂嗎<br>懂嗎<br>嗎
+        <b class="item-close js-popup-close">x</b>
+    </div>
+
     <div class="container" id="fixed-header">
         <div class="search-bar-container row">
             <div class="col-xs-6 col-sm-2 col-md-2 col-lg-2">
             </div>
             <div class="col-xs-12 col-sm-10 col-md-10 col-lg-10">
-                <input type="search" class="light-table-filter" data-table="comment-table" id="searchInput" placeholder="搜尋留言">
+                <input type="search" class="light-table-filter" data-table="comment-table" id="searchInput"
+                    placeholder="搜尋留言">
             </div>
         </div>
         <div class="main-container row">
@@ -155,11 +162,14 @@
                                         <div class="form-check col-xs-12 ">
                                             <div class="row ">
                                                 <div class="col-xs-1 checkbox-bar">
-                                                    <input type="checkbox" text="{{msg.text}} " class="form-check-input simple-focus" id="check{{forloop.counter0}} ">
+                                                    <input type="checkbox" text="{{msg.text}} "
+                                                        class="form-check-input simple-focus"
+                                                        id="check{{forloop.counter0}} ">
                                                 </div>
                                                 <div class="col-xs-9 ">
                                                     <div class="comment">
-                                                        <label class="form-check-label " for="check{{forloop.counter0}} ">
+                                                        <label class="form-check-label "
+                                                            for="check{{forloop.counter0}} ">
                                                             {{msg.text}}
                                                         </label>
                                                     </div>
@@ -180,10 +190,6 @@
                 <p>請根據以下留言，勾選相同意圖與實體的一起訓練 (這邊文字要調)</p>
             </blockquote>
         </div> -->
-
-
-
-
 
         <!--網站公告 start -->
         <!-- <div class="site-dialog server-billboard " style="display: none; ">
@@ -206,5 +212,5 @@
     </div>
 </body>
 <script src="{% static 'js/training_initialization.js' %} "></script>
-
+<script src="{% static 'jquery.popup.min.js' %}"></script>
 </html>

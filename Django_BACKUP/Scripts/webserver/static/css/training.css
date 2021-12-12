@@ -252,3 +252,30 @@ input[type=checkbox]:checked {
 .comment-table{
     width:100%;
 }
+
+.item {
+    max-width: 85%;
+    padding: 1em;
+    background: #eee;
+    display: none;
+    position: relative;
+    -webkit-box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.15);
+    -moz-box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.15);
+    box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.15);
+    border-radius: 3px;
+  }
+
+  .item-close {
+    cursor: pointer;
+    right: 5px;
+    top: 5px;
+    position: absolute;
+    background: #222;
+    color: #fff;
+    border-radius: 100%;
+    font-size: 18px;
+    height: 26px;
+    line-height: 22px;
+    text-align: center;
+    width: 26px;
+  }
