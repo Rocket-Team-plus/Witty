@@ -1,3 +1,4 @@
+
 $(window).on("scroll",function(){
     //判斷向下滑動的距離
     if($(window).scrollTop()>=100){
@@ -6,4 +7,4 @@ $(window).on("scroll",function(){
     }else{
         $(".site-header").removeClass("fixed");
     }
-});
+}); 

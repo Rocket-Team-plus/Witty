@@ -35,9 +35,9 @@
 }
 
 .picture:hover {
-    -webkit-transform: translateY(-15px);
+    /* -webkit-transform: translateY(-15px);
     -ms-transform: translateY(-15px);
-    transform: translateY(-15px);
+    transform: translateY(-15px); */
     -webkit-box-shadow: 0 0 5px black;
     box-shadow: 0 0 5px black;
     -webkit-transition: all .1s ease-out;
@@ -50,4 +50,8 @@
 .simple-focus:hover {
     -webkit-box-shadow: 0 0 5px black;
     box-shadow: 0 0 5px black;
+}
+
+.invisible {
+    visibility: hidden;
 }

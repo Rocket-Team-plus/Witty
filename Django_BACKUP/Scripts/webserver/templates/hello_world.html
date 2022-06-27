@@ -320,15 +320,23 @@
 							</div>
 
 							<div class="col-xs-12 col-sm-6 picture hover">
-								<div class="title">單場直播留言互動表現<span data-hover=" 點選下拉式選單可選擇場次
+								<div class="title">多場次直播各標下單數量圖<span data-hover=" 點選下拉式選單可選擇場次
 										<br>選擇點選圖表上的標數可以取消顯示該標數"><img class="help-img img-circle img-responsive"
 										src="{% static 'img/question-mark.png' %}"></span>
 								</div>
 								<div class="picture_display">
 									<div class="form-select-bar">
-										<select class="form-select form-select-lg mb-3"
+										<div class="form-select-bar">
+											<p class="header-select">起始時間 : </p>
+											<input type="text" id="begin4" class="header-select">
+											<p class="header-select">~</p>
+											<p class="header-select"> 結束時間 : </p>
+											<input type="text" id="end4" class="header-select">
+											<button class="btn btn-primary header-select chart-btn" id="time5">送出</button>
+											<select class="form-select form-select-lg mb-3 invisible"
 											aria-label=".form-select-lg example" id="order_select">
 										</select>
+										</div>
 									</div>
 									<div class="data-content">
 										<canvas class="chart_js" id="bid_step_chart_chart"></canvas>
@@ -547,10 +555,10 @@
 								<div class="picture_display">
 									<div class="form-select-bar">
 										<p class="header-select">起始時間 : </p>
-										<input type="text" id="begin3" class="header-select">
+										<input type="text" id="begin5" class="header-select">
 										<p class="header-select">~</p>
 										<p class="header-select"> 結束時間 : </p>
-										<input type="text" id="end3" class="header-select">
+										<input type="text" id="end5" class="header-select">
 										<button class="btn btn-primary header-select chart-btn" id="time4">送出</button>
 									</div>
 									<div class="data-content">
@@ -559,7 +567,7 @@
 								</div>
 							</div>
 							<div class="col-sm-6 picture">
-								<div class="title">單場直播客群年齡分布</div>
+								<div class="title">單場直播客群年齡與消費力分布</div>
 								<div class="picture_display">
 									<div class="form-select-bar">
 										<select class="form-select form-select-lg mb-3"
@@ -572,7 +580,7 @@
 								</div>
 							</div>
 							<div class="col-sm-6 picture">
-								<div class="title">多場直播客群平均年齡分布</div>
+								<div class="title">多場直播客群平均年齡與消費力分布</div>
 								<div class="picture_display">
 									<div class="form-select-bar">
 										<p class="header-select">起始時間 : </p>

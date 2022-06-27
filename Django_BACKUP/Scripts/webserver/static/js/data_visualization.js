@@ -938,7 +938,7 @@ const goods_turnover_bar_config = (goods_turnover_bar_data) => {
             plugins: {
                 title: {
                     display: true,
-                    text: '各場次周轉率比例圖',
+                    text: '各月周轉率比例圖',
                     font: {
                         size: 18
                     }

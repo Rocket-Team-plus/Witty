@@ -38,7 +38,8 @@ const fill_in_select = () => {
         "#begin2", "#end2",
         "#begin3", "#end3",
         "#begin4", "#end4",
-        "#begin5", "#end5"];
+        "#begin5", "#end5",
+        "#begin6", "#end6"];
 
     //將input都設定填入時間區段
     fill_in_datepicker(time_inputs);
